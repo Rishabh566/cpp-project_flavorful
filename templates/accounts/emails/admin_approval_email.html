@@ -1,0 +1,17 @@
+{% autoescape off %}
+Hi {{user.first_name}},
+{% if is_approved %}
+We are delighted to inform you that your restaurant has been approved by our admin team at Flavorful. Congratulations! You can now proceed with publishing your food menu on our website.
+We are looking forward to a great collaboration and a successful partnership. Please let us know if you have any questions or concerns.
+Thank you for choosing Flavorful!
+Best regards,
+Flavorful Team
+{% else %}
+We regret to inform you that your food menu is not eligible for publishing on our website. Unfortunately, we cannot proceed with your submission at this time.
+If you require more information on this decision, please do not hesitate to contact us via email and we will be happy to assist you.
+We appreciate your interest in our website and hope to be able to work with you in the future.
+Best regards,
+Flavorful Team
+{% endif %}
+
+{% endautoescape %}
