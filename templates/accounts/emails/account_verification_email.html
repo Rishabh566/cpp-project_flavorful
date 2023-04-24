@@ -1,0 +1,7 @@
+{% autoescape off %}
+
+Activate Your Account
+Please verify your email address to activate your account.
+http://{{domain}}{% url 'activate' uidb64=uid token=token %}
+
+{% endautoescape %}
