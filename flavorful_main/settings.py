@@ -22,10 +22,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config('SECRET_KEY')
+SECRET_KEY = 'django-insecure-rr-m+56f+5!mm5at)9n0#0glyay=@jq%i0f!s^$ub1#j3nwu__'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', cast=bool)
+DEBUG = True
+#config('DEBUG', cast=bool)
 
 ALLOWED_HOSTS = ['X21171203-cloud-platform-program-env-1.eba-djcbcza2.ap-northeast-1.elasticbeanstalk.com','127.0.0.1']
 
@@ -84,22 +85,28 @@ TEMPLATES = [
 WSGI_APPLICATION = 'flavorful_main.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': 'x21171203-flavorful-db.c24uwqi0hrca.ap-northeast-1.rds.amazonaws.com',
-        'PORT': '5432',
-        'OPTIONS': {
-            'sslmode': 'require',
-            'options': '-c timezone=UTC',
-            },
-    }
-}
+# # Database
+# # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.contrib.gis.db.backends.postgis',
+#         'NAME': 'postgres',
+#         'USER': 'postgres',
+#         'PASSWORD': 'postgres',
+#         'HOST': 'x21171203-flavorful-db.c24uwqi0hrca.ap-northeast-1.rds.amazonaws.com',
+#         'PORT': '5432',
+#         'OPTIONS': {
+#             'sslmode': 'require',
+#             'options': '-c timezone=UTC',
+#             },
+#     }
+# }
+
+
+
+
+
+
 
 # DATABASES = {
 #     'default': {
@@ -111,16 +118,16 @@ DATABASES = {
 #         'HOST':'x21171203-flavorful-db.c24uwqi0hrca.ap-northeast-1.rds.amazonaws.com',
 #     }
 
-# DATABASES = {
-#     'default': {
-#         #'ENGINE': 'django.db.backends.postgresql',
-#         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-#         'NAME': config('DB_NAME'),
-#         'USER': config('DB_USER'),
-#         'PASSWORD': config('DB_PASSWORD'),
-#         'HOST':config('DB_HOST'),
-#     }
-
+DATABASES = {
+    'default': {
+        #'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD'),
+        'HOST':config('DB_HOST'),
+    }
+}
     #flavorful-db.c24uwqi0hrca.ap-northeast-1.rds.amazonaws.com
     #flavorful-db
 #}
@@ -195,22 +202,22 @@ DEFAULT_FROM_EMAIL = 'flavorfuldjango101@gmail.com'
 
 GOOGLE_API_KEY = 'AIzaSyDL22JZh7ltOX71tN3w0uJ5-r0HbBaCEM4'
 
-# if DEBUG == True:
-#     os.environ['PATH'] = os.path.join(BASE_DIR, 'env\Lib\site-packages\osgeo') + ';' + os.environ['PATH']
-#     os.environ['PROJ_LIB'] = os.path.join(BASE_DIR, 'env\Lib\site-packages\osgeo\data\proj') + ';' + os.environ['PATH']
-#     GDAL_LIBRARY_PATH = os.path.join(BASE_DIR, 'env\Lib\site-packages\osgeo\gdal304.dll')
+if DEBUG == True:
+    os.environ['PATH'] = os.path.join(BASE_DIR, 'env\Lib\site-packages\osgeo') + ';' + os.environ['PATH']
+    os.environ['PROJ_LIB'] = os.path.join(BASE_DIR, 'env\Lib\site-packages\osgeo\data\proj') + ';' + os.environ['PATH']
+    GDAL_LIBRARY_PATH = os.path.join(BASE_DIR, 'env\Lib\site-packages\osgeo\gdal304.dll')
 
 
-AWS_ACCESS_KEY_ID = 'ASIATUYJP7SUFWIP3U4F'
-AWS_SECRET_ACCESS_KEY = 'qFSQiMvyqC5AR7K83V2b9672vMlGEqB/tNIAecs8' 
-AWS_STORAGE_BUCKET_NAME = 'x21171203-cloud-platform-programming-bucket'
-AWS_CUSTOM_DOMAIN= '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
-AWS_S3_OBJECT_PARAMETERS = {'CacheControl' : 'max-age=86400' }
-AWS_DEFAULT_ACL= None
+# AWS_ACCESS_KEY_ID = 'ASIATUYJP7SUFWIP3U4F'
+# AWS_SECRET_ACCESS_KEY = 'qFSQiMvyqC5AR7K83V2b9672vMlGEqB/tNIAecs8' 
+# AWS_STORAGE_BUCKET_NAME = 'x21171203-cloud-platform-programming-bucket'
+# AWS_CUSTOM_DOMAIN= '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+# AWS_S3_OBJECT_PARAMETERS = {'CacheControl' : 'max-age=86400' }
+# AWS_DEFAULT_ACL= None
 
-AWS_LOCATION='static'
-STATICFILES_DIRS= [
-    os.path.join('BASE_DIR','static'),
-]
-AWS_S3_VERITY = True
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# AWS_LOCATION='static'
+# STATICFILES_DIRS= [
+#     os.path.join('BASE_DIR','static'),
+# ]
+# AWS_S3_VERITY = True
+# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
