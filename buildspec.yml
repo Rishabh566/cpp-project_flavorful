@@ -1,4 +1,5 @@
 version: 0.2
+
 phases:
   install:
     runtime-versions:
@@ -15,33 +16,35 @@ phases:
       
   pre_build:
     commands:
-     - sudo add-apt-repository ppa:ubuntugis/ppa
-     - sudo apt-get update
-     - sudo apt-get install gdal-bin -y
-     - which
-     - ogrinfo --version
-     - gdalinfo --version
-     - sudo apt update
-     - sudo apt -y upgrade
-     - sudo apt-get install libgdal-dev -y
-     - sudo find / -name "libgdal.so*"
-     - export CPLUS_INCLUDE_PATH=/usr/include/gdal
-     - export C_INCLUDE_PATH=/usr/include/gdal
-     - GDAL_LIBRARY_PATH = '/usr/lib/x86_64-linux-gnu/libgdal.so'
-    # - pip install GDAL==3.4.3
-     - sudo apt -y install gnupg2
-     - wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
-     - echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" |sudo tee  /etc/apt/sources.list.d/pgdg.list
-     - sudo apt install postgis postgresql-14-postgis-3 -y
+      - sudo add-apt-repository ppa:ubuntugis/ppa -y
+      - sudo apt-get update
+      - sudo apt-get install gdal-bin -y
+      - which ogrinfo gdalinfo
+      - ogrinfo --version
+      - gdalinfo --version
+      - sudo apt update
+      - sudo apt -y upgrade
+      - sudo apt-get install libgdal-dev -y
+      - sudo find / -name "libgdal.so*"
+      - export CPLUS_INCLUDE_PATH=/usr/include/gdal
+      - export C_INCLUDE_PATH=/usr/include/gdal
+      - export GDAL_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu/libgdal.so
+      - pip install GDAL
+      - sudo apt -y install gnupg2
+      - wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+      - echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" | sudo tee /etc/apt/sources.list.d/pgdg.list
+      - sudo apt-get update
+      - sudo apt-get install postgis postgresql-14-postgis-3 -y
     
-    build:
+  build:
     commands:
       - echo "Running Django migrations"
       - python manage.py makemigrations
       - python manage.py migrate --traceback
       - echo "Collecting static files"
-      - python manage.py collectstatic --noinput  >/dev/null
+      - python manage.py collectstatic --noinput >/dev/null
       - echo "Build Stage Successful."
+
 artifacts:
   files:
     - '**/*'
