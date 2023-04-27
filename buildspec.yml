@@ -13,7 +13,6 @@ phases:
       - pip install -r requirements.txt
       - sudo apt install ufw
       - pip install numpy
-      - pip install GDAL==3.4.3
       
   pre_build:
     commands:
@@ -27,12 +26,13 @@ phases:
      - sudo apt-get install libgdal-dev -y
      - export CPLUS_INCLUDE_PATH=/usr/include/gdal
      - export C_INCLUDE_PATH=/usr/include/gdal
+     - pip install GDAL==3.4.3
      - sudo apt -y install gnupg2
      - wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
      - echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" |sudo tee  /etc/apt/sources.list.d/pgdg.list
      - sudo apt install postgis postgresql-14-postgis-3 -y
-
-  build:
+    
+    build:
     commands:
       - echo "Running Django migrations"
       - python manage.py makemigrations
