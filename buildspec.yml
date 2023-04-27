@@ -12,7 +12,6 @@ phases:
       - pip install --upgrade pip --disable-pip-version-check
       - pip install -r requirements.txt
       - sudo apt install ufw
-      - pip install numpy
       
   pre_build:
     commands:
@@ -29,7 +28,6 @@ phases:
      - export CPLUS_INCLUDE_PATH=/usr/include/gdal
      - export C_INCLUDE_PATH=/usr/include/gdal
      - GDAL_LIBRARY_PATH = '/usr/lib/x86_64-linux-gnu/libgdal.so'
-
     # - pip install GDAL==3.4.3
      - sudo apt -y install gnupg2
      - wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
