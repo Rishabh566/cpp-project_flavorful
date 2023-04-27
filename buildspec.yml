@@ -6,7 +6,7 @@ phases:
     commands:
       - echo "Installing dependencies"
       - sudo apt update && apt upgrade -y
-      - sudo apt install python3-pip python3-dev ufw nginx
+      - sudo apt install python3-pip python3-dev ufw nginx -y
       - python3 -m venv env >/dev/null
       - chmod +x ./env/bin/activate >/dev/null
       - pip install --upgrade pip --disable-pip-version-check >/dev/null
