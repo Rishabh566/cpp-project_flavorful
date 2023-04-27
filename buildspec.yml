@@ -28,8 +28,8 @@ phases:
       - python manage.py makemigrations
       - python manage.py migrate --traceback >/dev/null
       - echo "Collecting static files"
-      - python manage.py collectstatic --noinput  >/dev/null
-      - echo "Build Stage Successful. Running CodeSecurity Analysis Using sonarcloud in next action phase "
+      #- python manage.py collectstatic --noinput  >/dev/null
+      - echo "Build Stage Successful."
 artifacts:
   files:
     - '**/*'
