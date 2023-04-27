@@ -10,6 +10,7 @@ phases:
       - chmod +x ./env/bin/activate
       - pip install --upgrade pip --disable-pip-version-check
       - pip install -r requirements.txt
+      - sudo apt install ufw
   pre_build:
     commands:
      - sudo add-apt-repository ppa:ubuntugis/ppa
@@ -21,6 +22,9 @@ phases:
      - wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
      - echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" |sudo tee  /etc/apt/sources.list.d/pgdg.list
      - sudo apt install postgis postgresql-14-postgis-3 -y
+     - sudo ufw allow 8000
+     - sudo ufw allow 80
+     - sudo ufw status
   build:
     commands:
       - echo "Running Django migrations"
