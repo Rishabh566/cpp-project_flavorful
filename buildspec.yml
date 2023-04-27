@@ -1,0 +1,35 @@
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      python: 3.10
+    commands:
+      - echo "Installing dependencies"
+      - sudo apt update && apt upgrade -y
+      - sudo apt install python3-pip python3-dev ufw nginx
+      - python3 -m venv env >/dev/null
+      - chmod +x ./env/bin/activate >/dev/null
+      - pip install --upgrade pip --disable-pip-version-check >/dev/null
+      - pip install -r requirements.txt >/dev/null
+  pre_build:
+    commands:
+     - sudo add-apt-repository ppa:ubuntugis/ppa
+     - sudo apt-get install gdal-bin -y
+     - gdalinfo --version
+     - sudo apt update
+     - sudo apt -y upgrade
+     - sudo apt -y install gnupg2
+     - wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+     - echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" |sudo tee  /etc/apt/sources.list.d/pgdg.list
+     - sudo apt install postgis postgresql-14-postgis-3 -y
+  build:
+    commands:
+      - echo "Running Django migrations"
+      - python manage.py makemigrations
+      - python manage.py migrate --traceback >/dev/null
+      - echo "Collecting static files"
+      - python manage.py collectstatic --noinput  >/dev/null
+      - echo "Build Stage Successful. Running CodeSecurity Analysis Using sonarcloud in next action phase "
+artifacts:
+  files:
+    - '**/*'
