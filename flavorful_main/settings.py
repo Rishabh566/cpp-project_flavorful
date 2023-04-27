@@ -27,7 +27,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', cast=bool)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['http://x21171203-cloud-platform-program-env.eba-djcbcza2.ap-northeast-1.elasticbeanstalk.com/','127.0.0.1']
 
 
 # Application definition
@@ -87,15 +87,29 @@ WSGI_APPLICATION = 'flavorful_main.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+
 DATABASES = {
     'default': {
         #'ENGINE': 'django.db.backends.postgresql',
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': config('DB_NAME'),
+        'NAME': 'postgres',
         'USER': config('DB_USER'),
         'PASSWORD': config('DB_PASSWORD'),
-        'HOST':config('DB_HOST'),
+        'HOST':'x21171203-flavorful-db.c24uwqi0hrca.ap-northeast-1.rds.amazonaws.com',
     }
+
+# DATABASES = {
+#     'default': {
+#         #'ENGINE': 'django.db.backends.postgresql',
+#         'ENGINE': 'django.contrib.gis.db.backends.postgis',
+#         'NAME': config('DB_NAME'),
+#         'USER': config('DB_USER'),
+#         'PASSWORD': config('DB_PASSWORD'),
+#         'HOST':config('DB_HOST'),
+#     }
+
+    #flavorful-db.c24uwqi0hrca.ap-northeast-1.rds.amazonaws.com
+    #flavorful-db
 }
 
 AUTH_USER_MODEL = 'accounts.User'
@@ -137,7 +151,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR /'static'
+STATIC_ROOT = os.path.join(BASE_DIR /'static')
 STATICFILES_DIRS = [
     'flavorful_main/static'
 ]
@@ -145,7 +159,7 @@ STATICFILES_DIRS = [
 #MEDIA file configuration
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / "media"
+MEDIA_ROOT = os.path.join(BASE_DIR / "media")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -168,7 +182,22 @@ DEFAULT_FROM_EMAIL = 'flavorfuldjango101@gmail.com'
 
 GOOGLE_API_KEY = 'AIzaSyDL22JZh7ltOX71tN3w0uJ5-r0HbBaCEM4'
 
+if DEBUG == True:
+    os.environ['PATH'] = os.path.join(BASE_DIR, 'env\Lib\site-packages\osgeo') + ';' + os.environ['PATH']
+    os.environ['PROJ_LIB'] = os.path.join(BASE_DIR, 'env\Lib\site-packages\osgeo\data\proj') + ';' + os.environ['PATH']
+    GDAL_LIBRARY_PATH = os.path.join(BASE_DIR, 'env\Lib\site-packages\osgeo\gdal304.dll')
 
-os.environ['PATH'] = os.path.join(BASE_DIR, 'env\Lib\site-packages\osgeo') + ';' + os.environ['PATH']
-os.environ['PROJ_LIB'] = os.path.join(BASE_DIR, 'env\Lib\site-packages\osgeo\data\proj') + ';' + os.environ['PATH']
-GDAL_LIBRARY_PATH = os.path.join(BASE_DIR, 'env\Lib\site-packages\osgeo\gdal304.dll')
+
+AWS_ACCESS_KEY_ID = 'ASIATUYJP7SUFWIP3U4F'
+AWS_SECRET_ACCESS_KEY = 'qFSQiMvyqC5AR7K83V2b9672vMlGEqB/tNIAecs8' 
+AWS_STORAGE_BUCKET_NAME = 'x21171203-cloud-platform-programming-bucket'
+AWS_CUSTOM_DOMAIN= '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+AWS_S3_OBJECT_PARAMETERS = {'CacheControl' : 'max-age=86400' }
+AWS_DEFAULT_ACL= None
+
+AWS_LOCATION='static'
+STATICFILES_DIRS= [
+    os.path.join('BASE_DIR','static'),
+]
+AWS_S3_VERITY = True
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
