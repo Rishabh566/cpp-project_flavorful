@@ -42,7 +42,7 @@ phases:
       - python manage.py makemigrations
       - python manage.py migrate --traceback
       - echo "Collecting static files"
-      - python manage.py collectstatic --noinput >/dev/null
+      - python manage.py collectstatic
       - echo "Build Stage Successful."
 
 artifacts:
