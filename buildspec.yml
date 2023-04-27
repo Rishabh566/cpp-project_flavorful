@@ -16,11 +16,14 @@ phases:
   pre_build:
     commands:
      - sudo add-apt-repository ppa:ubuntugis/ppa
+     - sudo apt-get update
      - sudo apt-get install gdal-bin -y
+     - systemctl restart nginx.service
      - ogrinfo --version
-     - sudo apt update
      - gdalinfo --version
+     - sudo apt update
      - sudo apt -y upgrade
+     - systemctl restart unattended-upgrades.service
      - sudo apt-get install libgdal-dev
      - export CPLUS_INCLUDE_PATH=/usr/include/gdal
      - export C_INCLUDE_PATH=/usr/include/gdal
