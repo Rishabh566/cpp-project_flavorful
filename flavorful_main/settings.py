@@ -123,7 +123,7 @@ DATABASES = {
 
     #flavorful-db.c24uwqi0hrca.ap-northeast-1.rds.amazonaws.com
     #flavorful-db
-}
+#}
 
 AUTH_USER_MODEL = 'accounts.User'
 
