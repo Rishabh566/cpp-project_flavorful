@@ -86,17 +86,30 @@ WSGI_APPLICATION = 'flavorful_main.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
-
 DATABASES = {
     'default': {
-        #'ENGINE': 'django.db.backends.postgresql',
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'postgres',
-        'USER': config('DB_USER'),
-        'PASSWORD': config('DB_PASSWORD'),
-        'HOST':'x21171203-flavorful-db.c24uwqi0hrca.ap-northeast-1.rds.amazonaws.com',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': 'x21171203-flavorful-db.c24uwqi0hrca.ap-northeast-1.rds.amazonaws.com',
+        'PORT': '5432',
+        'OPTIONS': {
+            'sslmode': 'require',
+            'options': '-c timezone=UTC',
+            },
     }
+}
+
+# DATABASES = {
+#     'default': {
+#         #'ENGINE': 'django.db.backends.postgresql',
+#         'ENGINE': 'django.contrib.gis.db.backends.postgis',
+#         'NAME': 'postgres',
+#         'USER': config('DB_USER'),
+#         'PASSWORD': config('DB_PASSWORD'),
+#         'HOST':'x21171203-flavorful-db.c24uwqi0hrca.ap-northeast-1.rds.amazonaws.com',
+#     }
 
 # DATABASES = {
 #     'default': {
@@ -182,10 +195,10 @@ DEFAULT_FROM_EMAIL = 'flavorfuldjango101@gmail.com'
 
 GOOGLE_API_KEY = 'AIzaSyDL22JZh7ltOX71tN3w0uJ5-r0HbBaCEM4'
 
-if DEBUG == True:
-    os.environ['PATH'] = os.path.join(BASE_DIR, 'env\Lib\site-packages\osgeo') + ';' + os.environ['PATH']
-    os.environ['PROJ_LIB'] = os.path.join(BASE_DIR, 'env\Lib\site-packages\osgeo\data\proj') + ';' + os.environ['PATH']
-    GDAL_LIBRARY_PATH = os.path.join(BASE_DIR, 'env\Lib\site-packages\osgeo\gdal304.dll')
+# if DEBUG == True:
+#     os.environ['PATH'] = os.path.join(BASE_DIR, 'env\Lib\site-packages\osgeo') + ';' + os.environ['PATH']
+#     os.environ['PROJ_LIB'] = os.path.join(BASE_DIR, 'env\Lib\site-packages\osgeo\data\proj') + ';' + os.environ['PATH']
+#     GDAL_LIBRARY_PATH = os.path.join(BASE_DIR, 'env\Lib\site-packages\osgeo\gdal304.dll')
 
 
 AWS_ACCESS_KEY_ID = 'ASIATUYJP7SUFWIP3U4F'
