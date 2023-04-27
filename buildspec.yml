@@ -6,7 +6,6 @@ phases:
     commands:
       - echo "Installing dependencies"
       - sudo apt update && apt upgrade -y
-      - sudo apt install python3-pip python3-dev ufw nginx -y
       - python3 -m venv env
       - chmod +x ./env/bin/activate
       - pip install --upgrade pip --disable-pip-version-check
@@ -25,11 +24,11 @@ phases:
   build:
     commands:
       - echo "Running Django migrations"
-      - python manage.py makemigrations
-      - python manage.py migrate --traceback
+      - python3 manage.py makemigrations
+      - python3 manage.py migrate --traceback
       - echo "Collecting static files"
-      #- python manage.py collectstatic --noinput  >/dev/null
-      - python manage.py loaddata backup.json
+      - python3 manage.py collectstatic --noinput  >/dev/null
+      - python3 manage.py loaddata backup.json
       - echo "Build Stage Successful."
 artifacts:
   files:
