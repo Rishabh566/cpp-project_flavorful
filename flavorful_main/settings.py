@@ -195,10 +195,10 @@ DEFAULT_FROM_EMAIL = 'flavorfuldjango101@gmail.com'
 
 GOOGLE_API_KEY = 'AIzaSyDL22JZh7ltOX71tN3w0uJ5-r0HbBaCEM4'
 
-if DEBUG == True:
-    os.environ['PATH'] = os.path.join(BASE_DIR, 'env\Lib\site-packages\osgeo') + ';' + os.environ['PATH']
-    os.environ['PROJ_LIB'] = os.path.join(BASE_DIR, 'env\Lib\site-packages\osgeo\data\proj') + ';' + os.environ['PATH']
-    GDAL_LIBRARY_PATH = os.path.join(BASE_DIR, 'env\Lib\site-packages\osgeo\gdal304.dll')
+# if DEBUG == True:
+#     os.environ['PATH'] = os.path.join(BASE_DIR, 'env\Lib\site-packages\osgeo') + ';' + os.environ['PATH']
+#     os.environ['PROJ_LIB'] = os.path.join(BASE_DIR, 'env\Lib\site-packages\osgeo\data\proj') + ';' + os.environ['PATH']
+#     GDAL_LIBRARY_PATH = os.path.join(BASE_DIR, 'env\Lib\site-packages\osgeo\gdal304.dll')
 
 
 AWS_ACCESS_KEY_ID = 'ASIATUYJP7SUFWIP3U4F'
