@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-rr-m+56f+5!mm5at)9n0#0glyay=@jq%i0f!s^$ub1#j3nwu__
 DEBUG = True
 #config('DEBUG', cast=bool)
 
-ALLOWED_HOSTS = ['X21171203-cloud-platform-program-env-1.eba-djcbcza2.ap-northeast-1.elasticbeanstalk.com']
+ALLOWED_HOSTS = ['X21171203-cloud-platform-program-env-1.eba-djcbcza2.ap-northeast-1.elasticbeanstalk.com', '*']
 
 
 # Application definition

@@ -6,7 +6,8 @@ phases:
     commands:
       - echo "Installing dependencies"
       - sudo apt update && apt upgrade -y
-      - python -m venv env
+      - sudo apt-get install python3.6-dev
+      - python3 -m venv env
       - chmod +x ./env/bin/activate
       - pip install --upgrade pip --disable-pip-version-check
       - pip install -r requirements.txt
@@ -16,9 +17,14 @@ phases:
     commands:
      - sudo add-apt-repository ppa:ubuntugis/ppa
      - sudo apt-get install gdal-bin -y
-     - gdalinfo --version
+     - ogrinfo --version
      - sudo apt update
+     - gdalinfo --version
      - sudo apt -y upgrade
+     - sudo apt-get install libgdal-dev
+     - export CPLUS_INCLUDE_PATH=/usr/include/gdal
+     - export C_INCLUDE_PATH=/usr/include/gdal
+     - pip install GDAL
      - sudo apt -y install gnupg2
      - wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
      - echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" |sudo tee  /etc/apt/sources.list.d/pgdg.list
