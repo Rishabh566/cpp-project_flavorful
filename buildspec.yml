@@ -38,11 +38,14 @@ phases:
     
   build:
     commands:
+      - cd $CODEBUILD_SRC_DIR
+      - ls -la
       - echo "Running Django migrations"
       - python manage.py makemigrations
       - python manage.py migrate --traceback
       - echo "Collecting static files"
       - python manage.py collectstatic --noinput
+      - ls -la
       - echo "Build Stage Successful."
 
 artifacts:
